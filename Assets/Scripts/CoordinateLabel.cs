@@ -13,6 +13,7 @@ public class CoordinateLabel : MonoBehaviour
     {
         tmpObj = GetComponent<TextMeshPro>();
         DisplayCurrentCoordinates();
+        UpdateObjName();
     }
 
     // Update is called once per frame
@@ -21,13 +22,19 @@ public class CoordinateLabel : MonoBehaviour
         if (!Application.isPlaying)
         {
             DisplayCurrentCoordinates();
+            UpdateObjName();
         }   
     }
 
     void DisplayCurrentCoordinates()
     {
-        position.x = Mathf.RoundToInt(transform.parent.position.x);
-        position.y = Mathf.RoundToInt(transform.parent.position.y);
-        tmpObj.text = position.x / 10 + "," + position.y/10;
+        position.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
+        position.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+        tmpObj.text = position.x + "," + position.y;
+    }
+
+    void UpdateObjName()
+    {
+        transform.parent.name = position.ToString();
     }
 }
