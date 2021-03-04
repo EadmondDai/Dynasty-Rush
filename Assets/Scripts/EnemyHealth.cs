@@ -13,6 +13,10 @@ public class EnemyHealth : MonoBehaviour
         curHealth = maxHealthPoint;
     }
 
+    void OnEnable()
+    {
+        curHealth = maxHealthPoint;    
+    }
 
     void OnParticleCollision(GameObject other)
     {
@@ -24,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
         curHealth--;
         if(curHealth <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
