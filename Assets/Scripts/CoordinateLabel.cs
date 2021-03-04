@@ -6,12 +6,18 @@ using TMPro;
 [ExecuteAlways]
 public class CoordinateLabel : MonoBehaviour
 {
+    [SerializeField] Color defaultColor = Color.white;
+    [SerializeField] Color blockedColor = Color.grey;
+
     TextMeshPro tmpObj;
     Vector2Int position = new Vector2Int();
+    WayPoint waypoint;
 
     void Awake()
     {
         tmpObj = GetComponent<TextMeshPro>();
+        tmpObj.enabled = false;
+        waypoint = GetComponentInParent<WayPoint>();
         DisplayCurrentCoordinates();
         UpdateObjName();
     }
@@ -23,7 +29,15 @@ public class CoordinateLabel : MonoBehaviour
         {
             DisplayCurrentCoordinates();
             UpdateObjName();
-        }   
+        }
+
+        ChangeLabelColor();
+        ToggleLabel();
+    }
+
+    void ChangeLabelColor()
+    {
+        if(tmpObj) tmpObj.color = waypoint.IsPlaceable ? defaultColor : blockedColor;
     }
 
     void DisplayCurrentCoordinates()
@@ -36,5 +50,13 @@ public class CoordinateLabel : MonoBehaviour
     void UpdateObjName()
     {
         transform.parent.name = position.ToString();
+    }
+
+    void ToggleLabel()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            tmpObj.enabled = !tmpObj.enabled;
+        }
     }
 }

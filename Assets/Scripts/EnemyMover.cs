@@ -11,13 +11,25 @@ public class EnemyMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindPath();
+        GetToStart();
         StartCoroutine(PrintPath());
     }
 
-    // Update is called once per frame
-    void Update()
+    void FindPath()
     {
-        
+        path.Clear();
+
+        GameObject pathNode = GameObject.FindGameObjectWithTag("Path");
+        foreach (Transform child in pathNode.transform)
+        { 
+            path.Add(child.GetComponent<WayPoint>());
+        }
+    }
+
+    void GetToStart()
+    {
+        transform.position = path[0].transform.position;
     }
 
     IEnumerator PrintPath()
@@ -37,5 +49,7 @@ public class EnemyMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+
+        Destroy(gameObject);
     }
 }
