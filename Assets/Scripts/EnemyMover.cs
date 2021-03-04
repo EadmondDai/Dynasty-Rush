@@ -8,9 +8,12 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] List<WayPoint> path = new List<WayPoint>();
     [Range(0, 10)] [SerializeField] float speed = 1.0f;
 
+    private Enemy enemyScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        enemyScript = GetComponent<Enemy>();
         FindPath();
         GetToStart();
         StartCoroutine(PrintPath());
@@ -50,6 +53,8 @@ public class EnemyMover : MonoBehaviour
             }
         }
 
+
+        enemyScript.onEscaped();
         gameObject.SetActive(false);
     }
 }

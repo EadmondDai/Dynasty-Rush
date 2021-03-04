@@ -7,9 +7,12 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int maxHealthPoint = 5;
     [SerializeField] int curHealth;
 
+    private Enemy enemyScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        enemyScript = GetComponent<Enemy>();
         curHealth = maxHealthPoint;
     }
 
@@ -28,6 +31,10 @@ public class EnemyHealth : MonoBehaviour
         curHealth--;
         if(curHealth <= 0)
         {
+            if (enemyScript)
+            {
+                enemyScript.onDied();
+            }
             gameObject.SetActive(false);
         }
     }
