@@ -9,6 +9,7 @@ public class CoordinateLabel : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.white;
     [SerializeField] Color blockedColor = Color.grey;
+    [SerializeField] bool enableNameChange = true;
 
     TextMeshPro tmpObj;
     Vector2Int position = new Vector2Int();
@@ -17,7 +18,6 @@ public class CoordinateLabel : MonoBehaviour
     void Awake()
     {
         tmpObj = GetComponent<TextMeshPro>();
-        tmpObj.enabled = false;
         waypoint = GetComponentInParent<WayPoint>();
         DisplayCurrentCoordinates();
         UpdateObjName();
@@ -50,7 +50,8 @@ public class CoordinateLabel : MonoBehaviour
 
     void UpdateObjName()
     {
-        transform.parent.name = position.ToString();
+        if (enableNameChange)
+            transform.parent.name = position.ToString();
     }
 
     void ToggleLabel()
