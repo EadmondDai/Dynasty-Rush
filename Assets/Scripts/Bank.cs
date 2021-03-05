@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[DisallowMultipleComponent]
 public class Bank : MonoBehaviour
 {
+    [SerializeField] int goldNeededToWin = 500;
     [SerializeField] int startingFunds = 200;
     [SerializeField] int currentFunds;
     public int CurrentFunds {get { return currentFunds; } }
@@ -28,6 +30,11 @@ public class Bank : MonoBehaviour
 
         if (moneyChangeDelegate != null)
             moneyChangeDelegate(currentFunds);
+
+        if(currentFunds >= goldNeededToWin)
+        {
+            //TODO win, and proceed to next level;
+        }
 
         return true;
     }

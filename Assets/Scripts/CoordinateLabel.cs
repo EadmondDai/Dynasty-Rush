@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[ExecuteAlways]
+// Drag this script into Editor folder when build
+[RequireComponent(typeof(TextMeshPro))][ExecuteAlways][DisallowMultipleComponent]
 public class CoordinateLabel : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.white;

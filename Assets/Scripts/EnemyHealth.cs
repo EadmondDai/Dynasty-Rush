@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))][DisallowMultipleComponent]
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHealthPoint = 5;
-    [SerializeField] int difficultyFactor = 1;
+    [Tooltip("Ammount to increase the health when enemy dies")] [SerializeField] int difficultyFactor = 1;
     [SerializeField] int curHealth;
 
     private Enemy enemyScript;

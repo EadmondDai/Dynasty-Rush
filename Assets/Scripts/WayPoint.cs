@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class WayPoint : MonoBehaviour
 {
     [SerializeField] Tower towerPrefab;
@@ -14,7 +15,6 @@ public class WayPoint : MonoBehaviour
     {
         playerBank = GameObject.FindObjectOfType<Bank>();
     }
-
 
     void OnMouseDown()
     {

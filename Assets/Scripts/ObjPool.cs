@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class ObjPool : MonoBehaviour
 {
     [SerializeField] GameObject enemyObj;
     [SerializeField] int numOfEnemyThisWave = 10;
-    [SerializeField] float spawnDelay = 1f;
-    [SerializeField] int maxObjNum = 8;
+    [Range(0.5f, 30)] [SerializeField] float spawnDelay = 1f;
+    [Tooltip("Need to make sure always have enough enemy available")] [Range(1, 50)] [SerializeField] int maxObjNum = 8;
 
     private GameObject[] objPool;
 
@@ -34,21 +35,11 @@ public class ObjPool : MonoBehaviour
             }
         }
 
-        //GameObject newEnemy = Instantiate(enemyObj, transform);
-        //newEnemy.SetActive(false);
-
-        ////TODO Check if this could work.
-        //int curLenght = objPool.Length;
-        //objPool[++curLenght] = newEnemy;
-
-        //return newEnemy;
         return null;
     }
 
     IEnumerator createEnemy()
     {
-        // for(int i = 0; i < numOfEnemyThisWave; i++)
-        //{
         int curEnemyNum = 0;
         while (curEnemyNum < numOfEnemyThisWave)
         {
@@ -59,6 +50,5 @@ public class ObjPool : MonoBehaviour
             
             yield return new WaitForSeconds(spawnDelay);
         }
-        //}
     }
 }
