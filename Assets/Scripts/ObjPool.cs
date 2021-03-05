@@ -7,16 +7,13 @@ public class ObjPool : MonoBehaviour
     [SerializeField] GameObject enemyObj;
     [SerializeField] int numOfEnemyThisWave = 10;
     [SerializeField] float spawnDelay = 1f;
-    [SerializeField] int maxObjNum = 5;
+    [SerializeField] int maxObjNum = 8;
 
     private GameObject[] objPool;
 
     // Start is called before the first frame update
     void Start()
     {
-        //TODO figure out how to dynamic increase array size.
-        maxObjNum = numOfEnemyThisWave;
-
         objPool = new GameObject[maxObjNum];
         for(int i = 0; i < maxObjNum; ++i)
         {
@@ -27,7 +24,7 @@ public class ObjPool : MonoBehaviour
         StartCoroutine(createEnemy());
     }
 
-    GameObject findOrCreateEnemy()
+    GameObject findEnemy()
     {
         for(int i = 0; i < maxObjNum; ++i)
         {
@@ -52,9 +49,14 @@ public class ObjPool : MonoBehaviour
     {
         // for(int i = 0; i < numOfEnemyThisWave; i++)
         //{
-        while (true)
+        int curEnemyNum = 0;
+        while (curEnemyNum < numOfEnemyThisWave)
         {
-            findOrCreateEnemy().SetActive(true);
+            curEnemyNum++;
+            GameObject newNemey = findEnemy();
+            newNemey.SetActive(true);
+            newNemey.transform.position = transform.position;
+            
             yield return new WaitForSeconds(spawnDelay);
         }
         //}

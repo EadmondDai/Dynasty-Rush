@@ -14,9 +14,14 @@ public class EnemyMover : MonoBehaviour
     void Start()
     {
         enemyScript = GetComponent<Enemy>();
+       
+    }
+
+    void OnEnable()
+    {
         FindPath();
         GetToStart();
-        StartCoroutine(PrintPath());
+        StartCoroutine(FollowPath());
     }
 
     void FindPath()
@@ -35,7 +40,7 @@ public class EnemyMover : MonoBehaviour
         transform.position = path[0].transform.position;
     }
 
-    IEnumerator PrintPath()
+    IEnumerator FollowPath()
     {
         foreach(var wayPoint in path)
         {
@@ -56,5 +61,5 @@ public class EnemyMover : MonoBehaviour
 
         enemyScript.onEscaped();
         gameObject.SetActive(false);
-    }
+    } 
 }

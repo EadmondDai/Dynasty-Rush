@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoint: 5
+  difficultyFactor: 1
   curHealth: 0
 --- !u!114 &6377837457433450865
 MonoBehaviour:
