@@ -57,11 +57,4 @@ public class Bank : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

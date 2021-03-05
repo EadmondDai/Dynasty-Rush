@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHealthPoint = 5;
+    [SerializeField] int difficultyFactor = 1;
     [SerializeField] int curHealth;
 
     private Enemy enemyScript;
@@ -35,6 +36,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 enemyScript.onDied();
             }
+            maxHealthPoint += difficultyFactor;
             gameObject.SetActive(false);
         }
     }

@@ -8,13 +8,21 @@ public class WayPoint : MonoBehaviour
     [SerializeField] bool isPlaceable = false;
     public bool IsPlaceable { get { return isPlaceable; } }
 
+    private Bank playerBank;
+
+    private void Start()
+    {
+        playerBank = GameObject.FindObjectOfType<Bank>();
+    }
+
 
     void OnMouseDown()
     {
         if (isPlaceable)
         {
-            bool succss = towerPrefab.CreateTower(towerPrefab, transform.position);
-            isPlaceable = !succss;
+            Tower towObj = towerPrefab.CreateTower(towerPrefab, transform.position);
+            playerBank.Withdraw(towObj.GoldNeed);
+            isPlaceable = towObj == null;
         }   
     }
 }

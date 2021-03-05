@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 155912075}
   m_Layer: 0
   m_Name: Bank
-  m_TagString: Untagged
+  m_TagString: Bank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18553a409d231644b5c615fd31585c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingFunds: 200
+  startingFunds: 250
   currentFunds: 0
 --- !u!1001 &360516142
 PrefabInstance:
@@ -366,6 +366,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8227096556233559489, guid: ad217c66c91260b4da6081882147d970, type: 3}
   m_PrefabInstance: {fileID: 360516142}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &407720404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407720405}
+  m_Layer: 0
+  m_Name: TempObjHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407720405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407720404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &439578180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -478,7 +508,7 @@ MonoBehaviour:
   enemyObj: {fileID: 5040643765344069697, guid: b940df629b09f434dbb9fd487257db6c, type: 3}
   numOfEnemyThisWave: 10
   spawnDelay: 1
-  maxObjNum: 5
+  maxObjNum: 10
 --- !u!1001 &575180854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1104,7 +1134,7 @@ GameObject:
   - component: {fileID: 946551176}
   - component: {fileID: 946551178}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Gold Balance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1127,7 +1157,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -26}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &946551176
 MonoBehaviour:
@@ -1178,10 +1208,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 44.75
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

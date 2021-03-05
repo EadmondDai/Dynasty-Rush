@@ -5,30 +5,13 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] int goldNeed;
+    public int GoldNeed {get { return goldNeed; } }
 
-    private Bank playerBank;
 
-    // Start is called before the first frame update
-    void Start()
+    public Tower CreateTower(Tower prefab, Vector3 position)
     {
-        playerBank = GameObject.FindObjectOfType<Bank>();
-    }
 
-    public bool CreateTower(Tower prefab, Vector3 position)
-    {
-        bool succss = false;
-        if(playerBank)
-            succss = playerBank.Withdraw(goldNeed);
-
-        if (succss)
-        {
-            var towObj = Instantiate(prefab, position, Quaternion.identity);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        var towObj = Instantiate(prefab, position, Quaternion.identity);
+        return towObj;
     }
 }
