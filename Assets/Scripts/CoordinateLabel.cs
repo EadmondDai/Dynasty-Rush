@@ -7,18 +7,21 @@ using TMPro;
 [RequireComponent(typeof(TextMeshPro))][ExecuteAlways][DisallowMultipleComponent]
 public class CoordinateLabel : MonoBehaviour
 {
-    [SerializeField] Color defaultColor = Color.white;
-    [SerializeField] Color blockedColor = Color.grey;
+    Color defaultColor = Color.white;
+    Color blockedColor = Color.grey;
+    Color exploredColor = Color.yellow;
+    Color pathColorColor = new Color(1f, .5f, 0f);
     [SerializeField] bool enableNameChange = true;
 
     TextMeshPro tmpObj;
     Vector2Int position = new Vector2Int();
-    WayPoint waypoint;
+    [SerializeField] Graph graph;
 
     void Awake()
     {
+        graph = FindObjectOfType<Graph>();
         tmpObj = GetComponent<TextMeshPro>();
-        waypoint = GetComponentInParent<WayPoint>();
+        tmpObj.enabled = true;
         DisplayCurrentCoordinates();
         UpdateObjName();
     }
@@ -38,13 +41,36 @@ public class CoordinateLabel : MonoBehaviour
 
     void ChangeLabelColor()
     {
-        if(tmpObj) tmpObj.color = waypoint.IsPlaceable ? defaultColor : blockedColor;
+        if (graph)
+        {
+            Node curNode = graph.GetNode(position);
+            if (tmpObj!=null && curNode!=null)
+            {
+                if (!curNode.isWalkable)
+                {
+                    tmpObj.color = blockedColor;
+                }else if (curNode.isPath)
+                {
+                    tmpObj.color = pathColorColor;
+                }else if (curNode.isSearched)
+                {
+                    tmpObj.color = exploredColor;
+                }
+                else
+                {
+                    tmpObj.color = defaultColor;
+                }
+            }
+
+        }
     }
 
     void DisplayCurrentCoordinates()
     {
-        position.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
-        position.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+        if (graph == null) return;
+
+        position.x = Mathf.RoundToInt(transform.parent.position.x / graph.UnityGridSize);
+        position.y = Mathf.RoundToInt(transform.parent.position.z / graph.UnityGridSize);
         tmpObj.text = position.x + "," + position.y;
     }
 
