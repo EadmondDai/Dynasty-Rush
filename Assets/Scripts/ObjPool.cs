@@ -43,10 +43,14 @@ public class ObjPool : MonoBehaviour
         int curEnemyNum = 0;
         while (curEnemyNum < numOfEnemyThisWave)
         {
-            curEnemyNum++;
+            
             GameObject newNemey = findEnemy();
-            newNemey.SetActive(true);
-            newNemey.transform.position = transform.position;
+            if (newNemey)
+            {
+                newNemey.SetActive(true);
+                newNemey.transform.position = transform.position;
+                curEnemyNum++;
+            }
             
             yield return new WaitForSeconds(spawnDelay);
         }
