@@ -51,7 +51,7 @@ public class EnemyMover : MonoBehaviour
         for(int i = 0; i < path.Count; ++i)
         {
             Vector3 startPos = transform.position;
-            Vector3 endPos = graph.GetWorldPositionFromCoordinates(pathFinder.GoalPos);
+            Vector3 endPos = graph.GetWorldPositionFromCoordinates(path[i].position);
             float travelPercent = 0f;
 
             transform.LookAt(endPos);
