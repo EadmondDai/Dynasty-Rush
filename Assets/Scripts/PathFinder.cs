@@ -5,7 +5,9 @@ using UnityEngine;
 public class PathFinder : MonoBehaviour
 {
     [SerializeField] Vector2Int startPos;
+    public Vector2Int StartPos { get { return startPos; } }
     [SerializeField] Vector2Int goalPos;
+    public Vector2Int GoalPos { get { return goalPos; } }
     
     Node curNode;
     Node startNode;
@@ -19,19 +21,19 @@ public class PathFinder : MonoBehaviour
     Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
 
     void Awake()
-    {
+    {   
+
         graph = FindObjectOfType<Graph>();
         if (graph)
         {
-            grid = graph.Grid;
+            grid = graph.Grid;        
+            startNode = grid[startPos];
+            goalNode = grid[goalPos];
         }
     }
 
     void Start()
     {
-        startNode = grid[startPos];
-        goalNode = grid[goalPos];
-
         GetNewPath();
     }
 
@@ -69,6 +71,9 @@ public class PathFinder : MonoBehaviour
 
     void BFS()
     {
+        startNode.isWalkable = true;
+        goalNode.isWalkable = true;
+
         nodesToVisit.Clear();
         visited.Clear();
 

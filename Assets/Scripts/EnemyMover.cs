@@ -5,15 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))][DisallowMultipleComponent]
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] List<Tile> path = new List<Tile>();
+    
     [Range(0, 10)] [SerializeField] float speed = 1.0f;
 
+    List<Node> path = new List<Node>();
+
     private Enemy enemyScript;
+    private Graph graph;
+    private PathFinder pathFinder;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemyScript = GetComponent<Enemy>();
+        graph = FindObjectOfType<Graph>();
+        pathFinder = FindObjectOfType<PathFinder>();
     }
 
     void OnEnable()
@@ -26,19 +32,12 @@ public class EnemyMover : MonoBehaviour
     void FindPath()
     {
         path.Clear();
-
-        GameObject pathNode = GameObject.FindGameObjectWithTag("Path");
-        foreach (Transform child in pathNode.transform)
-        {
-            Tile wayPoint = child.GetComponent<Tile>();
-            if(wayPoint)
-                path.Add(wayPoint);
-        }
+        path = pathFinder.GetNewPath();
     }
 
     void GetToStart()
     {
-        transform.position = path[0].transform.position;
+        transform.position = graph.GetWorldPositionFromCoordinates(pathFinder.StartPos);
     }
 
     void FinishPath()
@@ -49,10 +48,10 @@ public class EnemyMover : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        foreach(var wayPoint in path)
+        for(int i = 0; i < path.Count; ++i)
         {
             Vector3 startPos = transform.position;
-            Vector3 endPos = wayPoint.transform.position;
+            Vector3 endPos = graph.GetWorldPositionFromCoordinates(pathFinder.GoalPos);
             float travelPercent = 0f;
 
             transform.LookAt(endPos);

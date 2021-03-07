@@ -6843,7 +6843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPos: {x: 0, y: 1}
-  goalPos: {x: 4, y: 4}
+  goalPos: {x: 9, y: 10}
 --- !u!1001 &1573202934
 PrefabInstance:
   m_ObjectHideFlags: 0
