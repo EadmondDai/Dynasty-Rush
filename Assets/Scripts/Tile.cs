@@ -43,7 +43,12 @@ public class Tile : MonoBehaviour
             Tower towObj = towerPrefab.CreateTower(towerPrefab, transform.position);
             playerBank.Withdraw(towObj.GoldNeed);
             isPlaceable = towObj == null;
-            graph.BlockNode(coordinates);
+            if(towObj)
+            {
+                graph.BlockNode(coordinates);
+                pathFinder.NotifyPathChange();
+            }
+                
         }   
     }
 }

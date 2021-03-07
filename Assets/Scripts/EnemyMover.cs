@@ -24,15 +24,26 @@ public class EnemyMover : MonoBehaviour
 
     void OnEnable()
     {
-        FindPath();
         GetToStart();
-        StartCoroutine(FollowPath());
+        GetNewpath(true);
     }
 
-    void FindPath()
+    void GetNewpath(bool resetPath)
     {
+        Vector2Int coordinates = new Vector2Int();
+        if (resetPath)
+        {
+            coordinates = pathFinder.StartPos;
+        }
+        else
+        {
+            coordinates = graph.GetCoordinatesFromPosition(transform.position);
+        }
+
+        StopAllCoroutines();
         path.Clear();
-        path = pathFinder.GetNewPath();
+        path = pathFinder.GetNewPath(coordinates);
+        StartCoroutine(FollowPath());
     }
 
     void GetToStart()
@@ -48,7 +59,7 @@ public class EnemyMover : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        for(int i = 0; i < path.Count; ++i)
+        for(int i = 1; i < path.Count; ++i)
         {
             Vector3 startPos = transform.position;
             Vector3 endPos = graph.GetWorldPositionFromCoordinates(path[i].position);
